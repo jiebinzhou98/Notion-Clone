@@ -8,8 +8,6 @@ const openai = new OpenAIApi(config)
 
 
 export async function generateImagePrompt(name: string){
-    //math
-    // -> :thumbnail that has a bunch of colourful shapes
     try{
         const response = await openai.createChatCompletion({
             model: 'gpt-3.5-turbo',
@@ -20,7 +18,8 @@ export async function generateImagePrompt(name: string){
             {
                 role: 'user',
                 content: `Please generate a thumbnail description for the notebook titles ${name}`
-            }],
+            },
+        ],
         });
         const data = await response.json()
         const image_description = data.choices[0].message.content
