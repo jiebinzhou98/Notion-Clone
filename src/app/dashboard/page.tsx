@@ -13,7 +13,7 @@ const DashboardPage = (props: Props) => {
             <div className='grainy min-h-screen'>
                 <div className='=max-w-7xl mx-auto p-10'>
                     <div className='h-14'></div>
-                    <div className='flex justify-center items-center md:flex-row flex-col'>
+                    <div className='flex justify-between items-center md:flex-row flex-col'>
                         <div className='flex items-center'>
                             <Link href='/'>
                                 <Button className='bg-green-600' size="sm">
