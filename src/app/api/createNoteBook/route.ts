@@ -1,6 +1,6 @@
 // api/createNoteBook
 
-import { generateImagePrompt } from "@/lib/openai";
+import { generateImagePrompt } from "@/lib/gemini";
 import { auth } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server";
 
