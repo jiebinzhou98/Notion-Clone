@@ -60,8 +60,12 @@ const CreateNoteDialog = (props: Props) => {
                     <Input value={input} onChange={e=>setInput(e.target.value)} placeholder='Name...' />
                     <div className='h-4'></div>
                     <div className='flex items-center gap-2'>
-                        <Button type='reset' variant={'secondary'}>Cancel</Button>
-                        <Button type='submit' className='bg-green-600'>Create</Button>
+                        <Button type='reset' variant={'secondary'}>
+                            Cancel
+                            </Button>
+                        <Button type='submit' className='bg-green-600' >
+                            Create
+                            </Button>
                     </div>
                 </form>
             </DialogContent>
