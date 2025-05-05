@@ -6,10 +6,12 @@ import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 type Props = {}
 
 const CreateNoteDialog = (props: Props) => {
+    const router = useRouter();
     const [input, setInput] = React.useState('')
     const createNotebook = useMutation ({
         mutationFn: async () =>{
@@ -22,16 +24,18 @@ const CreateNoteDialog = (props: Props) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(input === '') {
+        if(input === " ") {
             window.alert('Please enter a name for the notebook')
-            return
+            return;
         }
         createNotebook.mutate(undefined,{
-            onSuccess: () => {
-                console.log('yayy note created')
+            onSuccess: ({ note_id }) => {
+                console.log('created new notes: ', {note_id});
+                router.push(`/dashboard/${note_id}`)
             },
             onError: (error) => {
-                console.log('error creating note', error)
+                console.log(error)
+                window.alert("Failed to create notebook")
             }
         })
     }

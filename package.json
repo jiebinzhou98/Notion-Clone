@@ -28,6 +28,8 @@
     "pg": "^8.15.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "stability-ai": "^0.7.0",
+    "stability-client": "^1.9.0",
     "tailwind-merge": "^3.2.0",
     "typewriter-effect": "^2.22.0"
   },
