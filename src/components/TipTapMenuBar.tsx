@@ -21,7 +21,7 @@ type Props = {
   editor: Editor
 }
 
-const TipTapMenuBar = ( {editor}: Props) => {
+const TipTapMenuBar = ( {editor}: {editor: Editor}) => {
   return(
     <div className='flex flex-wrap gap-2'>
       <button onClick={() => editor.chain().focus().toggleBold().run()}
