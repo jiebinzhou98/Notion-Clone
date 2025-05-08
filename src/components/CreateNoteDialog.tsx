@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
-import { Plus } from 'lucide-react'
+import { Loader2, Plus } from 'lucide-react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { useMutation } from '@tanstack/react-query'
@@ -16,7 +16,7 @@ const CreateNoteDialog = (props: Props) => {
     const createNotebook = useMutation ({
         mutationFn: async () =>{
             const response = await axios.post('/api/createNoteBook', {
-                name: input
+                name: input.trim()
             })
             return response.data
         }
@@ -31,7 +31,7 @@ const CreateNoteDialog = (props: Props) => {
         createNotebook.mutate(undefined,{
             onSuccess: ({ note_id }) => {
                 console.log('created new notes: ', {note_id});
-                router.push(`/dashboard/${note_id}`)
+                router.push(`/notebook/${note_id}`)
             },
             onError: (error) => {
                 console.log(error)
@@ -39,6 +39,11 @@ const CreateNoteDialog = (props: Props) => {
             }
         })
     }
+
+    const handleCancel = () => {
+        setInput('')
+    }
+
     return (
         <Dialog>
             <DialogTrigger>
@@ -60,10 +65,13 @@ const CreateNoteDialog = (props: Props) => {
                     <Input value={input} onChange={e=>setInput(e.target.value)} placeholder='Name...' />
                     <div className='h-4'></div>
                     <div className='flex items-center gap-2'>
-                        <Button type='reset' variant={'secondary'}>
+                        <Button type='button' variant={'secondary'} onClick={handleCancel}>
                             Cancel
                             </Button>
-                        <Button type='submit' className='bg-green-600' >
+                        <Button type='submit' className='bg-green-600' disabled={createNotebook.isPending}>
+                            {createNotebook.isPending &&(
+                                <Loader2 className='w-4 h-4 mr-2 animate-spin'/>
+                            )}
                             Create
                             </Button>
                     </div>
