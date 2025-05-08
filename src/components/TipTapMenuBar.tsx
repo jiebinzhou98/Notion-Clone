@@ -1,6 +1,6 @@
-import { Editor } from "@tiptap/react";
-import {
-  Bold,
+import React from 'react'
+import { Editor } from '@tiptap/react'
+import { Bold,
   Code,
   CodepenIcon,
   Heading1,
@@ -15,26 +15,29 @@ import {
   Quote,
   Redo,
   Strikethrough,
-  Undo,
-} from "lucide-react";
+  Undo, } from 'lucide-react'
 
-const TipTapMenuBar = ({ editor }: { editor: Editor }) => {
-  return (
-    <div className="flex flex-wrap gap-2">
-      <button
-        onClick={() => editor.chain().focus().toggleBold().run()}
+type Props = {
+  editor: Editor
+}
+
+const TipTapMenuBar = ( {editor}: Props) => {
+  return(
+    <div className='flex flex-wrap gap-2'>
+      <button onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
-        className={editor.isActive("bold") ? "is-active" : ""}
-      >
-        <Bold className="w-6 h-6" />
+        className={editor.isActive("bold")? "is-active": ""}
+        >
+        <Bold className='w-6 h-6'/>
       </button>
-      <button
-        onClick={() => editor.chain().focus().toggleItalic().run()}
+
+      <button onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
-        className={editor.isActive("italic") ? "is-active" : ""}
-      >
-        <Italic className="w-6 h-6" />
+        className={editor.isActive("italic")? "is-active": ""}
+        >
+        <Italic className='w-6 h-6'/>
       </button>
+
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={!editor.can().chain().focus().toggleStrike().run()}
@@ -121,8 +124,9 @@ const TipTapMenuBar = ({ editor }: { editor: Editor }) => {
       >
         <Redo className="w-6 h-6" />
       </button>
-    </div>
-  );
-};
 
-export default TipTapMenuBar;
+    </div>
+  )
+}
+
+export default TipTapMenuBar

@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
-import { useEditor } from '@tiptap/react'
+import { EditorContent, useEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
-import { EditorContent } from '@tiptap/react'
+import TipTapMenuBar from './TipTapMenuBar'
+import { Button } from './ui/button'
 
 type Props = {}
 
@@ -17,11 +18,16 @@ const TipTapEditor = (props: Props) => {
         },
     })
     return (
-        <div>
+        <>
+        <div className='flex'>
+            {editor && <TipTapMenuBar editor={editor}/>
+        }
+            <Button>Saved</Button>
+        </div>
             <div>
                 <EditorContent editor={editor} />
             </div>
-        </div>
+        </>
     )
 }
 
