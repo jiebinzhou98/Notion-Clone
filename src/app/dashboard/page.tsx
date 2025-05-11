@@ -9,6 +9,7 @@ import { auth } from '@clerk/nextjs/server';
 import { eq } from 'drizzle-orm'
 import { db } from '@/lib/db';
 import { $notes } from '@/lib/db/schema';
+import Image from 'next/image';
 
 type Props = {}
 
@@ -56,7 +57,7 @@ const DashboardPage = async (props: Props) => {
                             return (
                                 <a href={`/notebook/${note.id}`} key={note.id}>
                                     <div className='border border-stone-300 rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition hover:-translate-y-1'>
-                                        <img width={400} height={200} alt={note.name} src={note.imageUrl || " " }/>
+                                        <Image width={400} height={200} alt={note.name} src={note.imageUrl || " " }/>
                                         <div className='p-4'>
                                         <h3 className='text-xl font-semibold text-gray-900'>
                                             {note.name}
