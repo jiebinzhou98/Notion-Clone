@@ -31,6 +31,7 @@ const CreateNoteDialog = (props: Props) => {
         createNotebook.mutate(undefined,{
             onSuccess: ({ note_id }) => {
                 console.log('created new notes: ', {note_id});
+                //hit another endpoint to upload the temp url to firebase
                 router.push(`/notebook/${note_id}`)
             },
             onError: (error) => {
