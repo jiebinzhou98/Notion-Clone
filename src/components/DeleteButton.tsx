@@ -19,7 +19,7 @@ const DeleteButton = ({noteId}: Props) => {
         }
     })
   return (
-    <Button variant={'destructive'} size='sm' onClick={()=> {
+    <Button variant={'destructive'} size='sm' disabled={deleteNote.isPending} onClick={()=> {
         const confirm = window.confirm("Are you sure you want to delete this note?")
         if (!confirm) return;
         deleteNote.mutate(undefined, {

@@ -8,6 +8,7 @@ import { clerkClient } from '@/lib/clerk-server'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import TipTapEditor from '@/components/TipTapEditor'
+import DeleteButton from '@/components/DeleteButton'
 
 type Props = {
     params: {
@@ -45,7 +46,9 @@ const NotebookPage = async ({ params: { noteId } }: Props) => {
                     </span>
                     <span className='inline-block mx-1'>/</span>
                     <span className='text-stone-500 font-semibold'>{note.name}</span>
-                    <div className='ml-auto'>DELETE BUTTON</div>
+                    <div className='ml-auto'>
+                        <DeleteButton noteId={note.id}/>
+                    </div>
                 </div>
                 <div className='h-4'></div>
                 <div className='border-stone-200 shadow-xl border rounded-lg px-16 py-8 w-full'>
