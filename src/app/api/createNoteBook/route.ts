@@ -1,3 +1,4 @@
+// api/createNoteBook
 import { db } from "@/lib/db";
 import { $notes } from "@/lib/db/schema";
 import { generateImage, generateImagePrompt } from "@/lib/gemini";
@@ -31,6 +32,6 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({
-        note_ids: note_ids[0].insertedId
+        note_id: note_ids[0].insertedId
     })
 }

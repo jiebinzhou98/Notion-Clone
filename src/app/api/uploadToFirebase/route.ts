@@ -2,6 +2,7 @@ import { $notes } from "@/lib/db/schema"
 import { db } from "@/lib/db"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
+import { uploadFileToFirebase } from "@/lib/firebase"
 
 export async function POST(req: Request){
     try{
@@ -14,5 +15,15 @@ export async function POST(req: Request){
         if (!notes[0].imageUrl){
             return new NextResponse(`no image url`, {status:400})
         }
-    }catch(error){}
+        const firebase_url = await uploadFileToFirebase(notes[0].imageUrl, notes[0].name)
+        //update the note with the firebase url
+        await db.update($notes).set({
+            imageUrl: firebase_url
+        }).where(
+            eq($notes.id, parseInt(noteId)));
+        return new NextResponse('ok', {status:200})
+    }catch(error){
+        console.error(error);
+        return new NextResponse("error", {status:500})
+    }
 }
