@@ -2,8 +2,16 @@ import TypewriterTitle from "@/components/TypewriterTitle";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {ArrowRight} from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+
+  if(userId) {
+    redirect("/dashboard")
+  }
+
   return (
     <div className="bg-gradient-to-r min-h-screen grainy from-rose-100 to-teal-100">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -16,7 +24,7 @@ export default function Home() {
         </h2>
         <div className="mt-8"></div>
         <div className="flex justify-center">
-        <Link href="/dashboard">
+        <Link href="/sign-in">
           <Button className="bg-green-600">Get Started
             <ArrowRight className="ml-2 w-5 h-5 " strokeWidth={3}/>
           </Button>
